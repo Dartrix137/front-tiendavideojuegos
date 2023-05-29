@@ -1,0 +1,28 @@
+#Logo
+{
+    max-width:80px;
+    height: auto;
+    
+}
+.nav-link
+{
+    color: white;
+}
+.nav-link:hover{
+    color: white;
+}
+#menu{
+    margin-right: 30%;
+}
+.nav-item{
+    margin-left: 60px;
+    margin-right: 60px;
+}
+.nav-item:hover{
+    color: rgb(65, 64, 64);
+    background-color: rgb(65, 64, 64);;
+}
+.navbar-toggler
+{
+    width: 50px;
+}

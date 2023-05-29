@@ -95,7 +95,7 @@ app.delete("/borrar-usuario/:id", (req, res) => {
 //CRUD Juegos
 app.get("/videojuegos", (req, res) => {
     connection.query(
-        'SELECT * FROM usuario',
+        'SELECT * FROM videojuego',
         function (err, results, fields) {
             res.json(results)
         }
@@ -121,26 +121,26 @@ app.get("/videojuego/:id", (req, res) => {
 app.post("/crear-videojuego", (req, res) => {
     const juego = req.body
     console.log(juego)
-    connection.query(`INSERT INTO usuario (nombre, portada, precio, director, protagonistas, fehcalanzamiento, productor) VALUES (?,?,?,?,?,?,?)`, [juego.nombre, juego.portada, juego.precio, juego.director, juego.protagonistas, juego.fehcalanzamiento, juego.productor], (err, result) => {
+    connection.query(`INSERT INTO videojuego (nombre, portada, precio, director, protagonistas, fechalanzamiento, productor) VALUES (?,?,?,?,?,?,?)`, [juego.nombre, juego.portada, juego.precio, juego.director, juego.protagonistas, juego.fechalanzamiento, juego.productor], (err, result) => {
         if (err) {
             console.log(err)
         } else {
             res.send("Videojuego creado")
-            console.log(usuario)
+            console.log(juego)
         }
     });
 });
 
-app.put("/actualizar-videojuego/:id", (req, res) => {
+app.put("/actualizar-precio/:id", (req, res) => {
     const id = req.params.id;
     const juego = req.body;
-    connection.query(`UPDATE videojuego SET nombre = '${juego.nombre}', portada = '${juego.portada}', precio = ${juego.precio}, director = '${juego.director}', protagonistas = '${juego.protagonistas}', fechalanzamiento = '${juego.fehcalanzamiento}', productor='${juego.productor}' WHERE id = ${id} `, (err, results) => {
+    connection.query(`UPDATE videojuego SET precio = ${juego.precio} WHERE id = ${id} `, (err, results) => {
         if (err) {
             res.json({ "respuesta": err });
             console.log(err);
         } else {
             res.json(juego);
-            console.log("usuario actualizado");
+            console.log("videojuego actualizado");
             console.log(results);
         };
     }
@@ -201,7 +201,7 @@ app.post("/crear-alquiler", (req, res) => {
     });
 });
 
-app.put("/actualizar-videojuego/:id", (req, res) => {
+app.put("/actualizar-fechavuelta-alquiler/:id", (req, res) => {
     const id = req.params.id;
     const alquiler = req.body;
     connection.query(`UPDATE Alquiler SET fechadevuelta = '${alquiler.fechadevuelta}' WHERE id = ${id} `, (err, results) => {
