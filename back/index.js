@@ -51,13 +51,12 @@ app.get("/usuario/:id", (req, res) => {
 
 app.post("/crear-usuario", (req, res) => {
     const usuario = req.body
-    console.log(usuario)
     connection.query(`INSERT INTO usuario (nombre, apellido, telefono, email) VALUES (?,?,?,?)`, [usuario.nombre, usuario.apellido, usuario.telefono, usuario.email], (err, result) => {
         if (err) {
             console.log(err)
         } else {
             res.send("Usuario creado")
-            console.log(usuario)
+            console.log("usuario creado")
         }
     });
 });
@@ -165,9 +164,10 @@ app.delete("/borrar-videojuego/:id", (req, res) => {
 //CRUD Alquiler
 app.get("/alquileres", (req, res) => {
     connection.query(
-        'SELECT * FROM Alquiler',
+        "SELECT Alquiler.id, videojuego.nombre as juego, usuario.nombre, usuario.telefono, Alquiler.fechaalquiler, Alquiler.fechadevuelta FROM Alquiler INNER JOIN videojuego ON Alquiler.idjuego = videojuego.id INNER JOIN usuario ON Alquiler.idcliente = usuario.id",
         function (err, results, fields) {
             res.json(results)
+            console.log(err)
         }
     );
 })
@@ -190,7 +190,7 @@ app.get("/alquiler/:id", (req, res) => {
 
 app.post("/crear-alquiler", (req, res) => {
     const alquiler = req.body
-    connection.query(`INSERT INTO Alquiler (idjuego, idcliente, fechaalquiler) VALUES (?,?,?)`, [alquiler.usuario, alquiler.videojuego, alquiler.fechaalquiler], (err, result) => {
+    connection.query(`INSERT INTO Alquiler (idjuego, idcliente, fechaalquiler) VALUES (?,?,?)`, [alquiler.videojuego, alquiler.usuario, alquiler.fechaalquiler], (err, result) => {
         if (err) {
             console.log(err)
         } else {
