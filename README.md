@@ -2,6 +2,7 @@
 # Reto electiva Sophos-Daniel Felipe Trujillo Guzmán
 
 ## Descripción del Reto
+## Reto 1
 Desarrollo de un servicio web para poder gestionar los alquileres de una tienda de videojuegos x
 
 Procesos básicos:
